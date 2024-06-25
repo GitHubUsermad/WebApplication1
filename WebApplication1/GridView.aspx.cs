@@ -37,10 +37,11 @@ namespace WebApplication1
             
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Label1.Text = GridView1.SelectedValue.ToString(); //取得文字を文字列に変えてtextに追加
-            string url = "DataCtrlFormOther2.aspx?index=" + Label1.Text.Trim();　
+            //Label1.Text = GridView1.SelectedValue.ToString(); //取得文字を文字列に変えてtextに追加
+            //string url = "DataCtrlFormOther2.aspx?index=" + Label1.Text.Trim();　
             //ラベル1（次のページ内）のtextプロパティから値を取得、前後空白削除、
-            Response.Redirect(url);//上記urlに移動
+            //Response.Redirect(url);//上記urlに移動
+            //GridView1.Rows.Add();
 
         }
 

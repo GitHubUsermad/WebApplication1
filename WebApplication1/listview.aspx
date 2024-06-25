@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:KensyuConnectionString %>" DeleteCommand="DELETE FROM [Employee] WHERE [EmpId] = @EmpId" InsertCommand="INSERT INTO [Employee] ([EmpId], [Sei], [Mei], [SeiKana], [MeiKana], [Birthday], [Prefecture], [Address], [Salary], [HireDate], [RetirementDate], [DeptId]) VALUES (@EmpId, @Sei, @Mei, @SeiKana, @MeiKana, @Birthday, @Prefecture, @Address, @Salary, @HireDate, @RetirementDate, @DeptId)" SelectCommand="SELECT * FROM [Employee] WHERE ([EmpId] = @EmpId)" UpdateCommand="UPDATE [Employee] SET [Sei] = @Sei, [Mei] = @Mei, [SeiKana] = @SeiKana, [MeiKana] = @MeiKana, [Birthday] = @Birthday, [Prefecture] = @Prefecture, [Address] = @Address, [Salary] = @Salary, [HireDate] = @HireDate, [RetirementDate] = @RetirementDate, [DeptId] = @DeptId WHERE [EmpId] = @EmpId">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:KensyuConnectionString %>" DeleteCommand="DELETE FROM [Employee] WHERE [EmpId] = @EmpId" InsertCommand="INSERT INTO [Employee] ([EmpId], [Sei], [Mei], [SeiKana], [MeiKana], [Birthday], [Prefecture], [Address], [Salary], [HireDate], [RetirementDate], [DeptId]) VALUES (@EmpId, @Sei, @Mei, @SeiKana, @MeiKana, @Birthday, @Prefecture, @Address, @Salary, @HireDate, @RetirementDate, @DeptId)" SelectCommand="SELECT * FROM [Employee]" UpdateCommand="UPDATE [Employee] SET [Sei] = @Sei, [Mei] = @Mei, [SeiKana] = @SeiKana, [MeiKana] = @MeiKana, [Birthday] = @Birthday, [Prefecture] = @Prefecture, [Address] = @Address, [Salary] = @Salary, [HireDate] = @HireDate, [RetirementDate] = @RetirementDate, [DeptId] = @DeptId WHERE [EmpId] = @EmpId" OnSelecting="SqlDataSource1_Selecting">
             <DeleteParameters>
                 <asp:Parameter Name="EmpId" Type="String" />
             </DeleteParameters>
@@ -29,9 +29,6 @@
                 <asp:Parameter DbType="Date" Name="RetirementDate" />
                 <asp:Parameter Name="DeptId" Type="Int32" />
             </InsertParameters>
-            <SelectParameters>
-                <asp:Parameter Name="EmpId" Type="String" />
-            </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Sei" Type="String" />
                 <asp:Parameter Name="Mei" Type="String" />
@@ -50,42 +47,45 @@
         <asp:ListView ID="ListView1" runat="server" DataKeyNames="EmpId" DataSourceID="SqlDataSource1" InsertItemPosition="LastItem" OnSelectedIndexChanged="ListView1_SelectedIndexChanged">
             <AlternatingItemTemplate>
                 <tr style="">
-                    <td></td>
                     <td>
-                        <asp:Label ID="EmpIdLabel" runat="server" Text='<%# Eval("EmpId") %>' />
+                        <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="削除" />
+                        <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="編集" />
                     </td>
                     <td>
-                        <asp:Label ID="SeiLabel" runat="server" Text='<%# Eval("Sei") %>' />
+                        <asp:DynamicControl runat="server" DataField="EmpId" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="MeiLabel" runat="server" Text='<%# Eval("Mei") %>' />
+                        <asp:DynamicControl runat="server" DataField="Sei" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="SeiKanaLabel" runat="server" Text='<%# Eval("SeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="Mei" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="MeiKanaLabel" runat="server" Text='<%# Eval("MeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="SeiKana" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="BirthdayLabel" runat="server" Text='<%# Eval("Birthday") %>' />
+                        <asp:DynamicControl runat="server" DataField="MeiKana" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="PrefectureLabel" runat="server" Text='<%# Eval("Prefecture") %>' />
+                        <asp:DynamicControl runat="server" DataField="Birthday" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="AddressLabel" runat="server" Text='<%# Eval("Address") %>' />
+                        <asp:DynamicControl runat="server" DataField="Prefecture" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="SalaryLabel" runat="server" Text='<%# Eval("Salary") %>' />
+                        <asp:DynamicControl runat="server" DataField="Address" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="HireDateLabel" runat="server" Text='<%# Eval("HireDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="Salary" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="RetirementDateLabel" runat="server" Text='<%# Eval("RetirementDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="HireDate" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="DeptIdLabel" runat="server" Text='<%# Eval("DeptId") %>' />
+                        <asp:DynamicControl runat="server" DataField="RetirementDate" Mode="ReadOnly" />
+                    </td>
+                    <td>
+                        <asp:DynamicControl runat="server" DataField="DeptId" Mode="ReadOnly" />
                     </td>
                 </tr>
             </AlternatingItemTemplate>
@@ -96,40 +96,40 @@
                         <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="キャンセル" />
                     </td>
                     <td>
-                        <asp:Label ID="EmpIdLabel1" runat="server" Text='<%# Eval("EmpId") %>' />
+                        <asp:DynamicControl runat="server" DataField="EmpId" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:TextBox ID="SeiTextBox" runat="server" Text='<%# Bind("Sei") %>' />
+                        <asp:DynamicControl runat="server" DataField="Sei" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="MeiTextBox" runat="server" Text='<%# Bind("Mei") %>' />
+                        <asp:DynamicControl runat="server" DataField="Mei" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="SeiKanaTextBox" runat="server" Text='<%# Bind("SeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="SeiKana" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="MeiKanaTextBox" runat="server" Text='<%# Bind("MeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="MeiKana" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="BirthdayTextBox" runat="server" Text='<%# Bind("Birthday") %>' />
+                        <asp:DynamicControl runat="server" DataField="Birthday" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="PrefectureTextBox" runat="server" Text='<%# Bind("Prefecture") %>' />
+                        <asp:DynamicControl runat="server" DataField="Prefecture" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="AddressTextBox" runat="server" Text='<%# Bind("Address") %>' />
+                        <asp:DynamicControl runat="server" DataField="Address" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="SalaryTextBox" runat="server" Text='<%# Bind("Salary") %>' />
+                        <asp:DynamicControl runat="server" DataField="Salary" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="HireDateTextBox" runat="server" Text='<%# Bind("HireDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="HireDate" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="RetirementDateTextBox" runat="server" Text='<%# Bind("RetirementDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="RetirementDate" Mode="Edit" />
                     </td>
                     <td>
-                        <asp:TextBox ID="DeptIdTextBox" runat="server" Text='<%# Bind("DeptId") %>' />
+                        <asp:DynamicControl runat="server" DataField="DeptId" Mode="Edit" />
                     </td>
                 </tr>
             </EditItemTemplate>
@@ -143,85 +143,88 @@
             <InsertItemTemplate>
                 <tr style="">
                     <td>
-                        <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="挿入" />
+                        <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="挿入" ValidationGroup="Insert" />
                         <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="クリア" />
                     </td>
                     <td>
-                        <asp:TextBox ID="EmpIdTextBox" runat="server" Text='<%# Bind("EmpId") %>' />
+                        <asp:DynamicControl runat="server" DataField="EmpId" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="SeiTextBox" runat="server" Text='<%# Bind("Sei") %>' />
+                        <asp:DynamicControl runat="server" DataField="Sei" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="MeiTextBox" runat="server" Text='<%# Bind("Mei") %>' />
+                        <asp:DynamicControl runat="server" DataField="Mei" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="SeiKanaTextBox" runat="server" Text='<%# Bind("SeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="SeiKana" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="MeiKanaTextBox" runat="server" Text='<%# Bind("MeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="MeiKana" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="BirthdayTextBox" runat="server" Text='<%# Bind("Birthday") %>' />
+                        <asp:DynamicControl runat="server" DataField="Birthday" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="PrefectureTextBox" runat="server" Text='<%# Bind("Prefecture") %>' />
+                        <asp:DynamicControl runat="server" DataField="Prefecture" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="AddressTextBox" runat="server" Text='<%# Bind("Address") %>' />
+                        <asp:DynamicControl runat="server" DataField="Address" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="SalaryTextBox" runat="server" Text='<%# Bind("Salary") %>' />
+                        <asp:DynamicControl runat="server" DataField="Salary" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="HireDateTextBox" runat="server" Text='<%# Bind("HireDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="HireDate" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="RetirementDateTextBox" runat="server" Text='<%# Bind("RetirementDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="RetirementDate" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                     <td>
-                        <asp:TextBox ID="DeptIdTextBox" runat="server" Text='<%# Bind("DeptId") %>' />
+                        <asp:DynamicControl runat="server" DataField="DeptId" Mode="Insert" ValidationGroup="Insert" />
                     </td>
                 </tr>
             </InsertItemTemplate>
             <ItemTemplate>
                 <tr style="">
-                    <td></td>
                     <td>
-                        <asp:Label ID="EmpIdLabel" runat="server" Text='<%# Eval("EmpId") %>' />
+                        <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="削除" />
+                        <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="編集" />
                     </td>
                     <td>
-                        <asp:Label ID="SeiLabel" runat="server" Text='<%# Eval("Sei") %>' />
+                        <asp:DynamicControl runat="server" DataField="EmpId" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="MeiLabel" runat="server" Text='<%# Eval("Mei") %>' />
+                        <asp:DynamicControl runat="server" DataField="Sei" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="SeiKanaLabel" runat="server" Text='<%# Eval("SeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="Mei" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="MeiKanaLabel" runat="server" Text='<%# Eval("MeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="SeiKana" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="BirthdayLabel" runat="server" Text='<%# Eval("Birthday") %>' />
+                        <asp:DynamicControl runat="server" DataField="MeiKana" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="PrefectureLabel" runat="server" Text='<%# Eval("Prefecture") %>' />
+                        <asp:DynamicControl runat="server" DataField="Birthday" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="AddressLabel" runat="server" Text='<%# Eval("Address") %>' />
+                        <asp:DynamicControl runat="server" DataField="Prefecture" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="SalaryLabel" runat="server" Text='<%# Eval("Salary") %>' />
+                        <asp:DynamicControl runat="server" DataField="Address" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="HireDateLabel" runat="server" Text='<%# Eval("HireDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="Salary" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="RetirementDateLabel" runat="server" Text='<%# Eval("RetirementDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="HireDate" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="DeptIdLabel" runat="server" Text='<%# Eval("DeptId") %>' />
+                        <asp:DynamicControl runat="server" DataField="RetirementDate" Mode="ReadOnly" />
+                    </td>
+                    <td>
+                        <asp:DynamicControl runat="server" DataField="DeptId" Mode="ReadOnly" />
                     </td>
                 </tr>
             </ItemTemplate>
@@ -251,48 +254,57 @@
                         </td>
                     </tr>
                     <tr runat="server">
-                        <td runat="server" style=""></td>
+                        <td runat="server" style="">
+                            <asp:DataPager ID="DataPager1" runat="server">
+                                <Fields>
+                                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
+                                </Fields>
+                            </asp:DataPager>
+                        </td>
                     </tr>
                 </table>
             </LayoutTemplate>
             <SelectedItemTemplate>
                 <tr style="">
-                    <td></td>
                     <td>
-                        <asp:Label ID="EmpIdLabel" runat="server" Text='<%# Eval("EmpId") %>' />
+                        <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="削除" />
+                        <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="編集" />
                     </td>
                     <td>
-                        <asp:Label ID="SeiLabel" runat="server" Text='<%# Eval("Sei") %>' />
+                        <asp:DynamicControl runat="server" DataField="EmpId" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="MeiLabel" runat="server" Text='<%# Eval("Mei") %>' />
+                        <asp:DynamicControl runat="server" DataField="Sei" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="SeiKanaLabel" runat="server" Text='<%# Eval("SeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="Mei" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="MeiKanaLabel" runat="server" Text='<%# Eval("MeiKana") %>' />
+                        <asp:DynamicControl runat="server" DataField="SeiKana" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="BirthdayLabel" runat="server" Text='<%# Eval("Birthday") %>' />
+                        <asp:DynamicControl runat="server" DataField="MeiKana" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="PrefectureLabel" runat="server" Text='<%# Eval("Prefecture") %>' />
+                        <asp:DynamicControl runat="server" DataField="Birthday" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="AddressLabel" runat="server" Text='<%# Eval("Address") %>' />
+                        <asp:DynamicControl runat="server" DataField="Prefecture" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="SalaryLabel" runat="server" Text='<%# Eval("Salary") %>' />
+                        <asp:DynamicControl runat="server" DataField="Address" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="HireDateLabel" runat="server" Text='<%# Eval("HireDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="Salary" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="RetirementDateLabel" runat="server" Text='<%# Eval("RetirementDate") %>' />
+                        <asp:DynamicControl runat="server" DataField="HireDate" Mode="ReadOnly" />
                     </td>
                     <td>
-                        <asp:Label ID="DeptIdLabel" runat="server" Text='<%# Eval("DeptId") %>' />
+                        <asp:DynamicControl runat="server" DataField="RetirementDate" Mode="ReadOnly" />
+                    </td>
+                    <td>
+                        <asp:DynamicControl runat="server" DataField="DeptId" Mode="ReadOnly" />
                     </td>
                 </tr>
             </SelectedItemTemplate>

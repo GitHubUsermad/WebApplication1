@@ -44,9 +44,9 @@
                 <asp:Parameter Name="EmpId" Type="String" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="EmpId" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="EmpId" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowPaging="True" AllowSorting="True">
             <Columns>
-                <asp:CommandField ShowSelectButton="True" />
+                <asp:CommandField ShowSelectButton="True" ShowDeleteButton="True" ShowEditButton="True" />
                 <asp:BoundField DataField="EmpId" HeaderText="EmpId" ReadOnly="True" SortExpression="EmpId" />
                 <asp:BoundField DataField="Mei" HeaderText="Mei" SortExpression="Mei" />
                 <asp:BoundField DataField="Sei" HeaderText="Sei" SortExpression="Sei" />
@@ -84,5 +84,9 @@
             </Columns>
         </asp:GridView>
     </form>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
 </body>
 </html>
